@@ -37,8 +37,7 @@
 // calls initM5Python which loads the various embedded python modules
 // into the python environment and then starts things running by
 // calling m5Main.
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     int ret;
 

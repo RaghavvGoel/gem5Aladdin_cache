@@ -176,6 +176,7 @@ system = System(mem_mode = test_mem_mode,
                 mem_ranges = [AddrRange(options.mem_size)],
                 cache_line_size = options.cacheline_size)
 
+
 # The O3 model requires fetch buffer size at most the cache line size.
 if CPUClass.type == 'DerivO3CPU':
   CPUClass.fetchBufferSize = min(CPUClass.fetchBufferSize, system.cache_line_size)
@@ -218,6 +219,7 @@ if options.accel_cfg_file:
     fatal("No accelerators were specified!")
   datapaths = []
   for accel in accels:
+    print("in for loop----------------------------")
     memory_type = config.get(accel, 'memory_type').lower()
     # Accelerators need their own clock domain!
     cycleTime = config.getint(accel, "cycle_time")
@@ -261,6 +263,7 @@ if options.accel_cfg_file:
       datapath.cacheHitLatency = config.getint(accel, "cache_hit_latency")
       datapath.cacheLineSize = options.cacheline_size
       datapath.cactiCacheConfig = config.get(accel, "cacti_cache_config")
+      #datapath.cactiL2CacheConfig = config.get(accel, "cacti_l2cache_config")	
       datapath.tlbEntries = config.getint(accel, "tlb_entries")
       datapath.tlbAssoc = config.getint(accel, "tlb_assoc")
       datapath.tlbHitLatency = config.getint(accel, "tlb_hit_latency")
@@ -358,4 +361,5 @@ else:
     MemConfig.config_mem(options, system)
 
 root = Root(full_system = False, system = system)
+print("yooooooooo")
 Simulation.run(options, root, system, FutureClass)
